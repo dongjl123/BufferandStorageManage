@@ -102,7 +102,7 @@ bool LRU::FULL_LRU()
     }
     else
     {
-        printf("The length of the LRU is wrong\n");
+        cout<<"The length of the LRU is wrong"<<endl;
         return 0;
     }
     

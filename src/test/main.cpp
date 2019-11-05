@@ -11,4 +11,5 @@ int main()
     LRU_element L1;
     LRU_list.insert_node(&L1);
     int len = LRU_list.return_len();
+    cout<<"len is "<<len<<endl;
 }
