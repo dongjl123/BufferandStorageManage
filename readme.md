@@ -1,3 +1,14 @@
+### 项目的编译和运行
+在主项目文件夹下：
+```shell
+$ mkdir build
+$ cd build
+$ cmake ../
+$ make
+$ cd bin
+$ ./main
+```
+
 ### 数据结构
 - 缓冲区LRU链表：用于buffer存放数据，LRU的数据结构
 ```c
