@@ -12,15 +12,10 @@ generatedCode
 
 bin/
 
-*.txt
-
 cmake-build-*/
 
 bin/
-build/
-CMakeLists.txt.user
-CMakeCache.txt
-CMakeFiles
+
 CMakeScripts
 Testing
 Makefile
