@@ -16,6 +16,8 @@ cmake-build-*/
 
 bin/
 
+.vscode/
+
 CMakeScripts
 Testing
 Makefile

@@ -1,16 +1,17 @@
 #include <iostream>
 #include <fstream>
+#include <data.hpp>
 
 #define DBF_FILE_NAME "data.dbf"
 #define DBF_LOG_NAME "data.log"
 
 using namespace std;
 
-class disk
+class Disk
 {
 public:
-    disk();
-    ~disk();
+    // Disk();
+    // ~Disk();
     void init_disk();
     void disk_input(int pageID);
     void disk_output(int pageID);
