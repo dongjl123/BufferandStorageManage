@@ -10,14 +10,15 @@ using namespace std;
 class Disk
 {
 public:
-    // Disk();
-    // ~Disk();
+    Disk();
+    ~Disk();
     void init_disk();
     void disk_input(int pageID);
     void disk_output(int pageID);
+
 private:
-    ifstream input;
-    ofstream output;
-    ofstream log;
+    ifstream *input;
+    ofstream *output;
+    ofstream *log;
     char *frame_data;
 };

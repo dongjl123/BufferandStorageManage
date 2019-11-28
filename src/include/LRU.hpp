@@ -37,3 +37,5 @@ public:
     bool FULL_LRU();        //判断LRU链表是否已满，满返回1，否则为0
 };
 
+
+
