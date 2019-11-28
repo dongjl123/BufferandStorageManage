@@ -13,8 +13,15 @@ int main()
     /* 初始化 */
     LRU LRU_list = LRU();
     Hash hash = Hash();
-    Disk disk_sto = Disk();
-    disk_sto.init_disk();
+    Disk disk_str = Disk();
+    cout<<"main"<<endl;
+    // LRU *LRU_list = new LRU();
+    // Hash *hash = new Hash();
+    // Disk *disk_str = new Disk();
+
+    // delete LRU_list;
+    // delete hash;
+    // delete disk_str;
     
     /* 读取文件 */
     // ifstream data_file("data-5w-50w-zipf.txt");
@@ -24,7 +31,7 @@ int main()
     //     string data, rw, page_num;
     //     data = "1,1000";
     //     int data_len;
-    //     // getline(data_file, data);       //从data_file中逐行往下读取数据
+    //     getline(data_file, data);       //从data_file中逐行往下读取数据
     //     data_len = data.length();
     //     rw = data.substr(0,1);
     //     cout<<rw<<endl;
