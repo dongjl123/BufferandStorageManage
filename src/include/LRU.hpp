@@ -33,8 +33,21 @@ public:
     LRU_element* return_tail();     //返回链表的最后一个节点
     void drop_head();       //drop链表中的第一个节点
     void adjust_LRU(LRU_element *node);     //把node放到链表的trail中去
+    void adjust_page(int page_num);
     int return_len();       //返回LRU链表的长度
-    bool FULL_LRU();        //判断LRU链表是否已满，满返回1，否则为0
+    bool isfull();        //判断LRU链表是否已满，满返回1，否则为0
+};
+
+/* 用于存储剩余可用的frame_ID */
+class frame_LRU:LRU
+{
+public:
+    frame_LRU();        //构造函数
+    ~frame_LRU();       //析构函数
+    void init_frame();
+    bool isempty();     //是否为空
+    void drop_frame();
+    LRU_element* victim_node();
 };
 
 

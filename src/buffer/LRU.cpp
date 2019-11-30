@@ -3,6 +3,7 @@
 /*构造函数*/
 LRU::LRU(void)
 {
+    init_LRU();
     cout<<"LRU has been created."<<endl;
 }
 
@@ -82,6 +83,16 @@ void LRU::adjust_LRU(LRU_element *node)
     node->next = &trail;
 }
 
+void LRU::adjust_page(int page_num)
+{
+    current = &head;
+    while(current->next->frameID!=page_num)
+    {
+        current = current->next;
+    }
+    adjust_LRU(current);
+}
+
 /*返回LRU链表的长度*/
 int LRU::return_len()
 {
@@ -89,7 +100,7 @@ int LRU::return_len()
 }
 
 /*判断LRU链表是否已满，满返回1，否则为0*/
-bool LRU::FULL_LRU()
+bool LRU::isfull()
 {
     int len = return_len();
     if(len < BufSize)
@@ -106,4 +117,47 @@ bool LRU::FULL_LRU()
         return 0;
     }
     
+}
+
+
+/*===============================frame_LRU================================*/
+
+frame_LRU::frame_LRU(void)
+{
+    init_frame();
+    cout<<"Frame LRU has been created"<<endl;
+}
+
+frame_LRU::~frame_LRU()
+{
+    cout<<"Frame LRU has been dropped"<<endl;
+}
+
+void frame_LRU::init_frame()
+{
+    for(int i=0; i<BufSize; i++)
+    {
+        LRU_element node;
+        node.frameID = i;
+        insert_node(&node);
+    }
+}
+
+bool frame_LRU::isempty()
+{
+    if(return_len()==0)
+        return true;
+    else
+        return false;
+}
+
+void frame_LRU::drop_frame()
+{
+    drop_head();
+}
+
+LRU_element* frame_LRU::victim_node()
+{
+    LRU_element *node = return_head();
+    return node;
 }
