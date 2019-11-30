@@ -2,6 +2,7 @@
 
 Hash::Hash(void)
 {
+    init_Hash();
     cout<<"Hash has been created."<<endl;
 }
 

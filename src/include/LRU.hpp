@@ -17,12 +17,15 @@ struct LRU_element
 class LRU
 {
 protected:
+    
+    
+
+public:
+
     LRU_element head;       //定义LRU链表的头指针
     LRU_element trail;      //定义LRU链表的尾指针
     LRU_element *current;       //定义LRU链表中现在指向的指针
-    int LRU_len;
-    
-public:
+    int LRU_len;    
     LRU();      //LRU构造函数
     ~LRU();     //LRU析构函数
     void init_head();       //初始化head节点
@@ -39,7 +42,7 @@ public:
 };
 
 /* 用于存储剩余可用的frame_ID */
-class frame_LRU:LRU
+class frame_LRU:public LRU
 {
 public:
     frame_LRU();        //构造函数

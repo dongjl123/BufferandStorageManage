@@ -68,8 +68,9 @@ LRU_element* LRU::return_tail()
 void LRU::drop_head()
 {
     LRU_element *true_head = head.next;
-    head.next = true_head->next;
-    true_head->next->front = &head;
+    cout<<true_head->frameID<<endl;
+    // head.next = true_head->next;
+    // true_head->next->front = &head;
     LRU_len--;
 }
 

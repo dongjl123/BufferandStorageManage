@@ -87,18 +87,18 @@ int main()
                 /* 更新frame列表 */
                 LRU_element *frame_node = frame.victim_node();
                 int frame_num = frame_node->frameID;
-                frame.drop_frame();
+                // frame.drop_head();
 
-                /* 更新LRU */
-                LRU_element *new_node;
-                new_node->pageID = page_num;
-                new_node->frameID = frame_num;
-                new_node->isHead = false;
-                new_node->isTrail = false;
-                LRU_list.insert_node(new_node);
+                // /* 更新LRU */
+                // LRU_element *new_node;
+                // new_node->pageID = page_num;
+                // new_node->frameID = frame_num;
+                // new_node->isHead = false;
+                // new_node->isTrail = false;
+                // LRU_list.insert_node(new_node);
 
-                /* 更新Hash */
-                hash.insert_BCB(frame_num, page_num, iswrite);
+                // /* 更新Hash */
+                // hash.insert_BCB(frame_num, page_num, iswrite);
             }
             
         }
