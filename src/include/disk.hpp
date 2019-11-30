@@ -18,8 +18,8 @@ public:
     void disk_output(int pageID);
 
 private:
-    ifstream *input;
-    ofstream *output;
-    ofstream *log;
+    ifstream input;
+    ofstream output;
+    ofstream log;
     char *frame_data;
 };

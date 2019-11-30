@@ -13,7 +13,7 @@ int main()
     /* 初始化 */
     LRU LRU_list = LRU();
     Hash hash = Hash();
-    Disk disk_str = Disk();
+    Disk *disk_str = new Disk();
     cout<<"main"<<endl;
     // LRU *LRU_list = new LRU();
     // Hash *hash = new Hash();
