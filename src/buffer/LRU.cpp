@@ -68,9 +68,10 @@ LRU_element* LRU::return_tail()
 void LRU::drop_head()
 {
     LRU_element *true_head = head.next;
-    cout<<true_head->frameID<<endl;
-    // head.next = true_head->next;
-    // true_head->next->front = &head;
+    // if(!true_head->isTrail)
+    //     cout<<true_head->frameID<<endl;
+    head.next = true_head->next;
+    true_head->next->front = &head;
     LRU_len--;
 }
 
@@ -125,6 +126,7 @@ bool LRU::isfull()
 
 frame_LRU::frame_LRU(void)
 {
+    init_LRU();
     init_frame();
     cout<<"Frame LRU has been created"<<endl;
 }
@@ -138,9 +140,9 @@ void frame_LRU::init_frame()
 {
     for(int i=0; i<BufSize; i++)
     {
-        LRU_element node;
-        node.frameID = i;
-        insert_node(&node);
+        LRU_element *node = new LRU_element();
+        node->frameID = i;
+        insert_node(node);
     }
 }
 
@@ -154,7 +156,8 @@ bool frame_LRU::isempty()
 
 void frame_LRU::drop_frame()
 {
-    drop_head();
+    head.next->next->front = &head;
+    head.next = head.next->next;
 }
 
 LRU_element* frame_LRU::victim_node()
