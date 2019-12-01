@@ -54,6 +54,7 @@ void LRU::drop_node(LRU_element *node)
 {
     node->front->next = node->next;
     node->next->front = node->front;
+    LRU_len--;
 }
 
 /*返回链表的第一个节点*/
@@ -105,14 +106,14 @@ void LRU::adjust_page(int page_num)
     while(!node->front->isHead)
     {
         node = node->front;
-        cout<<node->pageID<<" ";
+        // cout<<node->pageID<<" ";
         if(node->pageID==page_num)
         {
-            cout<<endl;
+            // cout<<endl;
             drop_node(node);
             insert_node(node);
             return;
-        }         
+        }        
     }
     cout<<"error in adjust page!"<<endl;;
     

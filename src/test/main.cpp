@@ -60,7 +60,8 @@ int main()
             if(frame.isempty())       //已满
             {
                 /* adjust新的节点到LRU链表中 */
-                LRU_element *victim_node = LRU_list.return_head();
+                LRU_element *victim_node = new LRU_element();
+                victim_node = LRU_list.return_head();
                 int victim_frameID = victim_node->frameID;
                 int victim_pageID = victim_node->pageID;
 
@@ -79,11 +80,10 @@ int main()
                 new_node->frameID = frame_ID;
                 new_node->isHead = false;
                 new_node->isTrail = false;
-                LRU_list.drop_head();
+                LRU_list.drop_node(victim_node);
                 LRU_list.insert_node(new_node);
                 if(!LRU_list.isfull())
                     cout<<"LRU insert error"<<endl;
-                delete new_node;
             }
             else                        //链表中还有空闲位置
             {
