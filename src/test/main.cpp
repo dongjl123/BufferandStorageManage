@@ -42,10 +42,13 @@ int main()
     {
         bool iswrite = test[num].iswrite;
         int page_num = test[num].page_num;
+        cout<<"num is "<<num<<endl;
+        cout<<page_num<<endl;
 
         /* 是否在buffer中 */
         if(hash.has_page(page_num))
         {
+            cout<<"Buffer"<<endl;       
             Buffer_Hit++;
             LRU_list.adjust_page(page_num);
         }
@@ -54,7 +57,7 @@ int main()
             IO_Hit++;
             disk_str->disk_input(page_num);
             /* 判断LRU链表是否已满 */
-            if(LRU_list.isfull())       //已满
+            if(frame.isempty())       //已满
             {
                 /* adjust新的节点到LRU链表中 */
                 LRU_element *victim_node = LRU_list.return_head();
@@ -71,7 +74,7 @@ int main()
                 delete victim_BCB;
                 
                 /* 更新新节点 */
-                LRU_element *new_node;
+                LRU_element *new_node = new LRU_element();
                 new_node->pageID = page_num;
                 new_node->frameID = frame_ID;
                 new_node->isHead = false;
@@ -90,7 +93,7 @@ int main()
                 frame.drop_head();
 
                 /* 更新LRU */
-                LRU_element *new_node;
+                LRU_element *new_node = new LRU_element();
                 new_node->pageID = page_num;
                 new_node->frameID = frame_num;
                 new_node->isHead = false;

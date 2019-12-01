@@ -50,6 +50,12 @@ void LRU::insert_node(LRU_element *new_node)
     LRU_len++;
 }
 
+void LRU::drop_node(LRU_element *node)
+{
+    node->front->next = node->next;
+    node->next->front = node->front;
+}
+
 /*返回链表的第一个节点*/
 LRU_element* LRU::return_head()
 {
@@ -68,11 +74,18 @@ LRU_element* LRU::return_tail()
 void LRU::drop_head()
 {
     LRU_element *true_head = head.next;
-    // if(!true_head->isTrail)
-    //     cout<<true_head->frameID<<endl;
-    head.next = true_head->next;
-    true_head->next->front = &head;
-    LRU_len--;
+    if(!true_head->isTrail)
+    {
+        // cout<<true_head->frameID<<endl;
+        head.next = true_head->next;
+        true_head->next->front = &head;
+        LRU_len--;
+    }
+    else
+    {
+        cout<<"error in drop head!"<<endl;
+    }
+    
 }
 
 void LRU::adjust_LRU(LRU_element *node)
@@ -87,12 +100,22 @@ void LRU::adjust_LRU(LRU_element *node)
 
 void LRU::adjust_page(int page_num)
 {
-    current = &head;
-    while(current->next->frameID!=page_num)
+    LRU_element *node = new LRU_element();
+    node = &trail;
+    while(!node->front->isHead)
     {
-        current = current->next;
+        node = node->front;
+        cout<<node->pageID<<" ";
+        if(node->pageID==page_num)
+        {
+            cout<<endl;
+            drop_node(node);
+            insert_node(node);
+            return;
+        }         
     }
-    adjust_LRU(current);
+    cout<<"error in adjust page!"<<endl;;
+    
 }
 
 /*返回LRU链表的长度*/

@@ -32,6 +32,7 @@ public:
     void init_trail();      //初始化尾节点
     void init_LRU();        //LRU链表整个初始化
     void insert_node(LRU_element *new_node);        //向链表中添加新的节点到尾部
+    void drop_node(LRU_element *node);
     LRU_element* return_head();     //返回链表的第一个节点
     LRU_element* return_tail();     //返回链表的最后一个节点
     void drop_head();       //drop链表中的第一个节点
