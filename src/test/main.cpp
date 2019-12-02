@@ -42,13 +42,13 @@ int main()
     {
         bool iswrite = test[num].iswrite;
         int page_num = test[num].page_num;
-        cout<<"num is "<<num<<endl;
-        cout<<page_num<<endl;
+        // cout<<"num is "<<num<<endl;
+        // cout<<page_num<<endl;
 
         /* 是否在buffer中 */
         if(hash.has_page(page_num))
         {
-            cout<<"Buffer"<<endl;       
+            // cout<<"Buffer"<<endl;       
             Buffer_Hit++;
             LRU_list.adjust_page(page_num);
         }

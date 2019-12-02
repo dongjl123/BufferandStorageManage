@@ -10,7 +10,6 @@ Disk::~Disk()
 {
     input.close();
     output.close();
-    log.close();
     cout<<"disk has been dropped."<<endl;
 }
 
@@ -22,12 +21,8 @@ void Disk::init_disk()
     disk_file.write(data, sizeof(data));
     disk_file.close();
 
-    disk_file.open(DBF_LOG_NAME);
-    disk_file.close();
-
     input.open(DBF_FILE_NAME, ios::binary);
     output.open(DBF_FILE_NAME, ios::binary);
-    log.open(DBF_LOG_NAME, ios::binary);
 
     cout<<"init disk done"<<endl;
 }

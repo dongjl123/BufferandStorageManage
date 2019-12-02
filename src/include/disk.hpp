@@ -4,7 +4,6 @@
 #include <cstring>
 
 #define DBF_FILE_NAME "data.dbf"
-#define DBF_LOG_NAME "data.log"
 
 using namespace std;
 
@@ -20,6 +19,5 @@ public:
 private:
     ifstream input;
     ofstream output;
-    ofstream log;
     char *frame_data;
 };
