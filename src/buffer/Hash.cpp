@@ -1,23 +1,24 @@
 #include "Hash.hpp"
 
+/* create Hash */
 Hash::Hash(void)
 {
     init_Hash();
     cout<<"Hash has been created."<<endl;
 }
 
+/* drop Hash */
 Hash::~Hash()
 {
     cout<<"Hash has been dropped."<<endl;
 }
 
-/*计算hash的值*/
+/* calculate hash */
 int Hash::hash(int pageID)
 {
     return pageID%BufSize;
 }
 
-/*Hash的初始化*/
 void Hash::init_Hash()
 {
     for(int i=0; i<BufSize; i++)
@@ -39,7 +40,7 @@ void Hash::init_Hash()
     }
 }
 
-/*加入哈希桶*/
+/* insert new BCB to HashTable */
 void Hash::insert_BCB(int frame_ID, int page_ID, bool is_Write)
 {
     BCB *new_BCB = new BCB;
@@ -56,14 +57,14 @@ void Hash::insert_BCB(int frame_ID, int page_ID, bool is_Write)
     HashTable[BCB_hash]->next = new_BCB;
 }
 
-/*删除哈希桶中的一个节点*/
+/* drop the first node in BCB */
 void Hash::drop_BCB(BCB *victim_BCB)
 {
     victim_BCB->front->next = victim_BCB->next;
     victim_BCB->next->front = victim_BCB->front;
 }
 
-/*判断该page_ID是否在已经buffer中*/
+/* whether the pageID is in buffer */
 bool Hash::has_page(int page_ID)
 {
     int BCB_hash = hash(page_ID);
@@ -79,7 +80,7 @@ bool Hash::has_page(int page_ID)
     return false;
 }
 
-/*找到该page_ID所对应的哈希桶中的节点*/
+/* find the BCB node with that pageID */
 BCB *Hash::find_BCB(int page_ID)
 {
     int BCB_hash = hash(page_ID);

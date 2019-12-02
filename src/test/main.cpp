@@ -17,8 +17,8 @@ int main()
     Hash hash = Hash();
     Disk *disk_str = new Disk();
     
-    /* 读取文件 */
-    ifstream data_file("data-5w-50w-zipf.txt");
+    /* read file */
+    ifstream data_file(TestFile);
     int num = 0;        //起始数据从0开始计数
     while(num < TestNum)
     {

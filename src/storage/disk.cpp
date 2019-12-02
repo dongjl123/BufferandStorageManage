@@ -17,7 +17,8 @@ void Disk::init_disk()
 {
     ofstream disk_file;
     disk_file.open(DBF_FILE_NAME);
-    char *data = (char *)malloc(DataNum*FrameSize);       //存储.dbf文件中的数据，最大50000行，每个数据最大4096
+    /* save the data in .dbf, max line:500000，max data size:4096 */
+    char *data = (char *)malloc(DataNum*FrameSize);
     disk_file.write(data, DataNum*FrameSize);
     disk_file.close();
   

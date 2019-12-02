@@ -21,7 +21,7 @@ void LRU::init_head()
     head.next = &tail;
 }
 
-void LRU::init_trail()
+void LRU::init_tail()
 {
     tail.isHead = false;
     tail.isTail = true;
@@ -29,10 +29,11 @@ void LRU::init_trail()
     tail.next = nullptr;
 }
 
+/* init a LRU list include a head and a tail */
 void LRU::init_LRU()
 {
     init_head();
-    init_trail();
+    init_tail();
     LRU_len = 0;
 }
 
@@ -59,6 +60,14 @@ bool LRU::isfull()
     }
 }
 
+bool LRU::isempty()
+{
+    if(return_len()==0)
+        return true;
+    else
+        return false;
+}
+
 /* return the true head */
 LRU_element* LRU::return_head()
 {
@@ -69,10 +78,11 @@ LRU_element* LRU::return_head()
 /* return the true tail */
 LRU_element* LRU::return_tail()
 {
-    LRU_element *true_trail = tail.front;
-    return true_trail;
+    LRU_element *true_tail = tail.front;
+    return true_tail;
 }
 
+/* inset a new node bufore trail */
 void LRU::insert_node(LRU_element *new_node)
 {
     new_node->next = &tail;
@@ -91,12 +101,12 @@ void LRU::drop_node(LRU_element *node)
     LRU_len--;
 }
 
+/* drop the true head */
 void LRU::drop_head()
 {
     LRU_element *true_head = head.next;
     if(!true_head->isTail)
     {
-        // cout<<true_head->frameID<<endl;
         head.next = true_head->next;
         true_head->next->front = &head;
         LRU_len--;
@@ -139,46 +149,3 @@ void LRU::adjust_page(int page_num)
 }
 
 
-/*===============================frame_LRU================================*/
-
-frame_LRU::frame_LRU(void)
-{
-    init_LRU();
-    init_frame();
-    cout<<"Frame LRU has been created"<<endl;
-}
-
-frame_LRU::~frame_LRU()
-{
-    cout<<"Frame LRU has been dropped"<<endl;
-}
-
-void frame_LRU::init_frame()
-{
-    for(int i=0; i<BufSize; i++)
-    {
-        LRU_element *node = new LRU_element();
-        node->frameID = i;
-        insert_node(node);
-    }
-}
-
-bool frame_LRU::isempty()
-{
-    if(return_len()==0)
-        return true;
-    else
-        return false;
-}
-
-void frame_LRU::drop_frame()
-{
-    head.next->next->front = &head;
-    head.next = head.next->next;
-}
-
-LRU_element* frame_LRU::victim_node()
-{
-    LRU_element *node = return_head();
-    return node;
-}

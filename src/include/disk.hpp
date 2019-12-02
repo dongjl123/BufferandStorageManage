@@ -9,15 +9,18 @@ using namespace std;
 
 class Disk
 {
-public:
-    Disk();
-    ~Disk();
-    void init_disk();
-    void disk_input(int pageID);
-    void disk_output(int pageID);
 
 private:
     ifstream input;
     ofstream output;
     char *frame_data;
+    void init_disk();
+
+public:
+    Disk();
+    ~Disk();
+    
+    void disk_input(int pageID);
+    void disk_output(int pageID);
+
 };
