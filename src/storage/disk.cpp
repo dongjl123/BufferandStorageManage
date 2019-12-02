@@ -18,9 +18,9 @@ void Disk::init_disk()
     ofstream disk_file;
     disk_file.open(DBF_FILE_NAME);
     char *data = (char *)malloc(DataNum*FrameSize);       //存储.dbf文件中的数据，最大50000行，每个数据最大4096
-    disk_file.write(data, sizeof(data));
+    disk_file.write(data, DataNum*FrameSize);
     disk_file.close();
-
+  
     input.open(DBF_FILE_NAME, ios::binary);
     output.open(DBF_FILE_NAME, ios::binary);
 
