@@ -25,7 +25,7 @@ main.exe
 struct LRU_element
 {
     bool isHead;
-    bool isTrail;
+    bool isTail;
     int frameID;
     int pageID;
     LRU_element *front;
@@ -37,7 +37,7 @@ struct LRU_element
 struct BCB
 {
     bool isHead;
-    bool isTrail;
+    bool isTail;
     int frameID;
     int pageID;
     bool isWrite;

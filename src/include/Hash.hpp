@@ -7,7 +7,7 @@ using namespace std;
 struct BCB
 {
     bool isHead;        //判断是否是第一个指针
-    bool isTrail;       //判断是否是最后一个指针
+    bool isTail;       //判断是否是最后一个指针
     int frameID;
     int pageID;
     bool isWrite;       //数据是否被修改

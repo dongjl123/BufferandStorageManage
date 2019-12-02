@@ -11,7 +11,7 @@
 
 int main()
 {
-    /* 初始化 */
+    /* init */
     LRU LRU_list = LRU();
     frame_LRU frame = frame_LRU();
     Hash hash = Hash();
@@ -42,13 +42,10 @@ int main()
     {
         bool iswrite = test[num].iswrite;
         int page_num = test[num].page_num;
-        // cout<<"num is "<<num<<endl;
-        // cout<<page_num<<endl;
 
         /* 是否在buffer中 */
         if(hash.has_page(page_num))
-        {
-            // cout<<"Buffer"<<endl;       
+        {     
             Buffer_Hit++;
             LRU_list.adjust_page(page_num);
         }
@@ -79,7 +76,7 @@ int main()
                 new_node->pageID = page_num;
                 new_node->frameID = frame_ID;
                 new_node->isHead = false;
-                new_node->isTrail = false;
+                new_node->isTail = false;
                 LRU_list.drop_node(victim_node);
                 LRU_list.insert_node(new_node);
                 if(!LRU_list.isfull())
@@ -97,7 +94,7 @@ int main()
                 new_node->pageID = page_num;
                 new_node->frameID = frame_num;
                 new_node->isHead = false;
-                new_node->isTrail = false;
+                new_node->isTail = false;
                 LRU_list.insert_node(new_node);
 
                 /* 更新Hash */

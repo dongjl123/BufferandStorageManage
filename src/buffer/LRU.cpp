@@ -1,34 +1,32 @@
 #include"LRU.hpp"
 
-/*构造函数*/
+/* create LRU */
 LRU::LRU(void)
 {
     init_LRU();
     cout<<"LRU has been created."<<endl;
 }
 
-/*析构函数*/
+/* drop LRU */
 LRU::~LRU()
 {
     cout<<"LRU had been dropped."<<endl;
 }
 
-/*LRU链表头节点初始化*/
 void LRU::init_head()
 {
     head.isHead = true;
-    head.isTrail = false;
+    head.isTail = false;
     head.front = nullptr;
-    head.next = &trail;
+    head.next = &tail;
 }
 
-/*LRU尾节点初始化*/
 void LRU::init_trail()
 {
-    trail.isHead = false;
-    trail.isTrail = true;
-    trail.front = &head;
-    trail.next = nullptr;
+    tail.isHead = false;
+    tail.isTail = true;
+    tail.front = &head;
+    tail.next = nullptr;
 }
 
 void LRU::init_LRU()
@@ -38,15 +36,51 @@ void LRU::init_LRU()
     LRU_len = 0;
 }
 
-/*向链表中添加新的节点到尾部*/
+int LRU::return_len()
+{
+    return LRU_len;
+}
+
+bool LRU::isfull()
+{
+    int len = return_len();
+    if(len < BufSize)
+    {
+        return false;
+    }
+    else if(len == BufSize)
+    {
+        return true;
+    }
+    else
+    {
+        cout<<"The length of the LRU is wrong"<<endl;
+        return 0;
+    }
+}
+
+/* return the true head */
+LRU_element* LRU::return_head()
+{
+    LRU_element *true_head = head.next;
+    return true_head;
+}
+
+/* return the true tail */
+LRU_element* LRU::return_tail()
+{
+    LRU_element *true_trail = tail.front;
+    return true_trail;
+}
+
 void LRU::insert_node(LRU_element *new_node)
 {
-    new_node->next = &trail;
-    new_node->front = trail.front;
+    new_node->next = &tail;
+    new_node->front = tail.front;
     new_node->front->next = new_node;
     new_node->isHead = false;
-    new_node->isTrail = false;
-    trail.front = new_node;
+    new_node->isTail = false;
+    tail.front = new_node;
     LRU_len++;
 }
 
@@ -57,25 +91,10 @@ void LRU::drop_node(LRU_element *node)
     LRU_len--;
 }
 
-/*返回链表的第一个节点*/
-LRU_element* LRU::return_head()
-{
-    LRU_element *true_head = head.next;
-    return true_head;
-}
-
-/*返回链表的最后一个节点*/
-LRU_element* LRU::return_tail()
-{
-    LRU_element *true_trail = trail.front;
-    return true_trail;
-}
-
-/*drop链表的第一个节点*/
 void LRU::drop_head()
 {
     LRU_element *true_head = head.next;
-    if(!true_head->isTrail)
+    if(!true_head->isTail)
     {
         // cout<<true_head->frameID<<endl;
         head.next = true_head->next;
@@ -93,16 +112,16 @@ void LRU::adjust_LRU(LRU_element *node)
 {
     node->front->next = node->next;
     node->next->front = node->front;
-    trail.front->next = node;
-    trail.front = node;
-    node->front = trail.front;
-    node->next = &trail;
+    tail.front->next = node;
+    tail.front = node;
+    node->front = tail.front;
+    node->next = &tail;
 }
 
 void LRU::adjust_page(int page_num)
 {
     LRU_element *node = new LRU_element();
-    node = &trail;
+    node = &tail;
     while(!node->front->isHead)
     {
         node = node->front;
@@ -116,32 +135,6 @@ void LRU::adjust_page(int page_num)
         }        
     }
     cout<<"error in adjust page!"<<endl;;
-    
-}
-
-/*返回LRU链表的长度*/
-int LRU::return_len()
-{
-    return LRU_len;
-}
-
-/*判断LRU链表是否已满，满返回1，否则为0*/
-bool LRU::isfull()
-{
-    int len = return_len();
-    if(len < BufSize)
-    {
-        return false;
-    }
-    else if(len == BufSize)
-    {
-        return true;
-    }
-    else
-    {
-        cout<<"The length of the LRU is wrong"<<endl;
-        return 0;
-    }
     
 }
 

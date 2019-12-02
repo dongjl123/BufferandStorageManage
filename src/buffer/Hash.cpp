@@ -23,17 +23,17 @@ void Hash::init_Hash()
     for(int i=0; i<BufSize; i++)
     {
         BCB *head = new BCB;
-        BCB *trail = new BCB;
+        BCB *tail = new BCB;
 
         head->isHead = true;
-        head->isTrail = false;
+        head->isTail = false;
         head->front = nullptr;
-        head->next = trail;
+        head->next = tail;
 
-        trail->isHead = false;
-        trail->isTrail = true;
-        trail->front = head;
-        trail->next = nullptr;
+        tail->isHead = false;
+        tail->isTail = true;
+        tail->front = head;
+        tail->next = nullptr;
 
         HashTable[i] = head;
     }
@@ -47,7 +47,7 @@ void Hash::insert_BCB(int frame_ID, int page_ID, bool is_Write)
     new_BCB->pageID = page_ID;
     new_BCB->isWrite = is_Write;
     new_BCB->isHead = false;
-    new_BCB->isTrail = false;
+    new_BCB->isTail = false;
 
     int BCB_hash = hash(page_ID);
     new_BCB->front = HashTable[BCB_hash];
@@ -68,7 +68,7 @@ bool Hash::has_page(int page_ID)
 {
     int BCB_hash = hash(page_ID);
     BCB *node = HashTable[BCB_hash];
-    while(!node->next->isTrail)
+    while(!node->next->isTail)
     {
         if(node->next->pageID==page_ID)
         {
@@ -84,7 +84,7 @@ BCB *Hash::find_BCB(int page_ID)
 {
     int BCB_hash = hash(page_ID);
     BCB *node = HashTable[BCB_hash];
-    while(!node->next->isTrail)
+    while(!node->next->isTail)
     {
         if(node->next->pageID==page_ID)
         {
