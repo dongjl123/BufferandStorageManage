@@ -20,13 +20,6 @@
 #define BOLDCYAN "\033[1m\033[36m" 
 #define BOLDWHITE "\033[1m\033[37m" 
 
-void IUI::print(char *message, int length) 
-{
-	std::string out(message, length);
-	std::cout << BOLDWHITE << "[info] " << RESET << out << std::endl;
-}
-
-
 void IUI::print(std::string message) 
 {
 	std::cout << BOLDWHITE << "[info] " << RESET << message << std::endl;

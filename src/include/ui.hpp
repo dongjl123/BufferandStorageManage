@@ -10,7 +10,6 @@ public:
     static void print(std::string message);
     static void error(std::string message);
     static void debug(std::string message);
-    static void print(char *message, int length);
     static void error(std::string message, int length);
     static void debug(std::string message, int length);
     static void result(std::string message, int num);
