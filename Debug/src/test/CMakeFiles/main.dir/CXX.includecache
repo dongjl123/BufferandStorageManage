@@ -1,0 +1,54 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../src/include/Hash.hpp
+iostream
+-
+data.hpp
+-
+
+../src/include/LRU.hpp
+iostream
+-
+data.hpp
+-
+
+../src/include/data.hpp
+
+../src/include/disk.hpp
+iostream
+-
+fstream
+-
+data.hpp
+-
+cstring
+-
+
+../src/include/test_data.hpp
+data.hpp
+-
+
+E:/2019 autumn/database/BufferandStorageManage/src/test/main.cpp
+iostream
+-
+fstream
+-
+LRU.hpp
+-
+Hash.hpp
+-
+disk.hpp
+-
+data.hpp
+-
+test_data.hpp
+-
+string
+-
+

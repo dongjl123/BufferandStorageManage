@@ -7,8 +7,6 @@
 #include <test_data.hpp>
 #include <string>
 
-// using namespace std;
-
 int main()
 {
     /* init */
@@ -19,31 +17,31 @@ int main()
     
     /* read file */
     ifstream data_file(TestFile);
-    int num = 0;        //起始数据从0开始计数
+    int num = 0;
     while(num < TestNum)
     {
         string data, rw, page_num;
         int data_len;
-        getline(data_file, data);       //从data_file中逐行往下读取数据
+        getline(data_file, data);       //read data from data_file
         data_len = data.length();
-        rw = data.substr(0,1);      //用于保存时读取还是写入
+        rw = data.substr(0,1);      //read or write
         if(rw=="1")
             test[num].iswrite = true;
         else
             test[num].iswrite = false;
-        page_num = data.substr(2,data_len-2);       //用于保存页号
+        page_num = data.substr(2,data_len-2);       //save pageID
         int page = atoi(page_num.c_str());
         test[num].page_num = page;
         num ++;
     }
 
-    /* 处理数据请求 */
+    /* handle data request */
     for(num=0; num<TestNum; num++)
     {
         bool iswrite = test[num].iswrite;
         int page_num = test[num].page_num;
 
-        /* 是否在buffer中 */
+        /* whether is in buffer */
         if(hash.has_page(page_num))
         {     
             Buffer_Hit++;
@@ -53,25 +51,25 @@ int main()
         {
             IO_Hit++;
             disk_str->disk_input(page_num);
-            /* 判断LRU链表是否已满 */
-            if(frame.isempty())       //已满
+            /* whether LRU is full and frame is empty */
+            if(frame.isempty())       
             {
-                /* adjust新的节点到LRU链表中 */
+                /* victim node in LRU */
                 LRU_element *victim_node = new LRU_element();
                 victim_node = LRU_list.return_head();
                 int victim_frameID = victim_node->frameID;
                 int victim_pageID = victim_node->pageID;
 
-                /* 更新Hash桶 */
-                BCB *victim_BCB = hash.find_BCB(victim_pageID);     //找到hash桶中对应的位置
-                if(victim_BCB->isWrite == true)     //判断是否有写入
+                /* update HashTable */
+                BCB *victim_BCB = hash.find_BCB(victim_pageID);     //find the BCB node in Hash with victim pageID
+                if(victim_BCB->isWrite == true)     //whether need to write to the disk(data has been changed)
                     disk_str->disk_output(victim_pageID);
                 int frame_ID = victim_BCB->frameID;
                 hash.drop_BCB(victim_BCB);
-                hash.insert_BCB(frame_ID, page_num, iswrite);
+                hash.insert_BCB(frame_ID, page_num, iswrite);       //insert noew BCB node
                 delete victim_BCB;
                 
-                /* 更新新节点 */
+                /* update LRU */
                 LRU_element *new_node = new LRU_element();
                 new_node->pageID = page_num;
                 new_node->frameID = frame_ID;
@@ -82,14 +80,15 @@ int main()
                 if(!LRU_list.isfull())
                     cout<<"LRU insert error"<<endl;
             }
-            else                        //链表中还有空闲位置
+            /* LRU is not full and still have free frame */
+            else                 
             {
-                /* 更新frame列表 */
+                /* updtae frame LRU */
                 LRU_element *frame_node = frame.return_head();
                 int frame_num = frame_node->frameID;
                 frame.drop_head();
 
-                /* 更新LRU */
+                /* update LRU */
                 LRU_element *new_node = new LRU_element();
                 new_node->pageID = page_num;
                 new_node->frameID = frame_num;
@@ -97,13 +96,17 @@ int main()
                 new_node->isTail = false;
                 LRU_list.insert_node(new_node);
 
-                /* 更新Hash */
+                /* update HashTable */
                 hash.insert_BCB(frame_num, page_num, iswrite);
             }
             
         }
         
     }
+
+#ifdef DEBUG
+    cout<<"here"<<endl;
+#endif
 
     cout<<"Buffer_Hit is "<<Buffer_Hit<<endl;
     cout<<"IO_Hit is "<<IO_Hit<<endl;

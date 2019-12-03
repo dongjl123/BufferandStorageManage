@@ -1,0 +1,2 @@
+C:\MinGW\bin\ar.exe qc libsrc_lib.a  CMakeFiles/src_lib.dir/buffer/Hash.cpp.obj CMakeFiles/src_lib.dir/buffer/LRU.cpp.obj CMakeFiles/src_lib.dir/buffer/frame.cpp.obj CMakeFiles/src_lib.dir/storage/disk.cpp.obj
+C:\MinGW\bin\ranlib.exe libsrc_lib.a

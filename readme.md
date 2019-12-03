@@ -1,4 +1,5 @@
 ### 项目的编译和运行
+#### release版本
 在主项目文件夹下：
 ```shell
 $ mkdir build
@@ -16,6 +17,15 @@ cmake -G"MinGW Makefiles" ../
 mingw32-make
 cd bin
 main.exe
+```
+#### debug版本
+linux命令行：
+```shell
+$ mkdir build
+$ cd debug
+$ cmake -g ../
+$ cd bin
+$ ./main
 ```
 
 ---

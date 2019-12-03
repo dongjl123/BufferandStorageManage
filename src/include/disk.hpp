@@ -3,8 +3,6 @@
 #include <data.hpp>
 #include <cstring>
 
-#define DBF_FILE_NAME "data.dbf"
-
 using namespace std;
 
 class Disk
