@@ -1,16 +1,17 @@
 #include "Hash.hpp"
+#include <ui.hpp>
 
 /* create Hash */
 Hash::Hash(void)
 {
     init_Hash();
-    cout<<"Hash has been created."<<endl;
+    IUI::print("Hash has been created.");
 }
 
 /* drop Hash */
 Hash::~Hash()
 {
-    cout<<"Hash has been dropped."<<endl;
+    IUI::print("Hash has been dropped.");
 }
 
 /* calculate hash */
@@ -38,6 +39,9 @@ void Hash::init_Hash()
 
         HashTable[i] = head;
     }
+#ifdef DEBUG
+    IUI::debug("init hash done.");
+#endif
 }
 
 /* insert new BCB to HashTable */
@@ -93,4 +97,5 @@ BCB *Hash::find_BCB(int page_ID)
         }
         node = node->next;
     }
+    IUI::error("error in find BCB!");
 }

@@ -5,17 +5,20 @@
 #include <disk.hpp>
 #include <data.hpp>
 #include <test_data.hpp>
+#include <ui.hpp>
 #include <string>
 
 int main()
 {
     /* init */
+    IUI::rule("begin to init");
     LRU LRU_list = LRU();
     frame_LRU frame = frame_LRU();
     Hash hash = Hash();
     Disk *disk_str = new Disk();
     
     /* read file */
+    IUI::rule("begin to read file");
     ifstream data_file(TestFile);
     int num = 0;
     while(num < TestNum)
@@ -36,6 +39,7 @@ int main()
     }
 
     /* handle data request */
+    IUI::rule("handle data request");
     for(num=0; num<TestNum; num++)
     {
         bool iswrite = test[num].iswrite;
@@ -86,7 +90,8 @@ int main()
                 /* updtae frame LRU */
                 LRU_element *frame_node = frame.return_head();
                 int frame_num = frame_node->frameID;
-                frame.drop_head();
+                if(!frame.drop_head())
+                    IUI::error("error in drop head!");
 
                 /* update LRU */
                 LRU_element *new_node = new LRU_element();
@@ -104,6 +109,8 @@ int main()
         
     }
 
-    cout<<"Buffer_Hit is "<<Buffer_Hit<<endl;
-    cout<<"IO_Hit is "<<IO_Hit<<endl;
+    IUI::rule("begin to print result");
+    IUI::result("Buffer_Hit is: ", Buffer_Hit);
+    IUI::result("IO_Hit is: ", IO_Hit);
+    IUI::rule("end");
 }

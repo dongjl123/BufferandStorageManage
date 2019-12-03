@@ -1,16 +1,17 @@
 #include"LRU.hpp"
+#include <ui.hpp>
 
 /* create LRU */
 LRU::LRU(void)
 {
     init_LRU();
-    cout<<"LRU has been created."<<endl;
+    IUI::print("LRU has been created.");
 }
 
 /* drop LRU */
 LRU::~LRU()
 {
-    cout<<"LRU had been dropped."<<endl;
+    IUI::print("LRU has been dropped.");
 }
 
 void LRU::init_head()
@@ -26,7 +27,7 @@ void LRU::init_tail()
     tail.isHead = false;
     tail.isTail = true;
     tail.front = &head;
-    tail.next = nullptr;
+    tail.next = nullptr;  
 }
 
 /* init a LRU list include a head and a tail */
@@ -39,7 +40,14 @@ void LRU::init_LRU()
 
 int LRU::return_len()
 {
-    return LRU_len;
+    if(LRU_len<=BufSize)
+        return LRU_len;
+    else
+    {
+        IUI::error("LRU len is error: ", LRU_len);
+        return -1;
+    }
+    
 }
 
 bool LRU::isfull()
@@ -102,20 +110,22 @@ void LRU::drop_node(LRU_element *node)
 }
 
 /* drop the true head */
-void LRU::drop_head()
+int LRU::drop_head()
 {
+    int rnt = 0;
     LRU_element *true_head = head.next;
     if(!true_head->isTail)
     {
         head.next = true_head->next;
         true_head->next->front = &head;
         LRU_len--;
+        rnt = 1;
     }
     else
-    {
-        cout<<"error in drop head!"<<endl;
-    }
-    
+        goto end;
+
+end:
+    return rnt;   
 }
 
 void LRU::adjust_LRU(LRU_element *node)
@@ -135,17 +145,14 @@ void LRU::adjust_page(int page_num)
     while(!node->front->isHead)
     {
         node = node->front;
-        // cout<<node->pageID<<" ";
         if(node->pageID==page_num)
         {
-            // cout<<endl;
             drop_node(node);
             insert_node(node);
             return;
         }        
     }
-    cout<<"error in adjust page!"<<endl;;
-    
+    IUI::error("error in adjust page!"); 
 }
 
 

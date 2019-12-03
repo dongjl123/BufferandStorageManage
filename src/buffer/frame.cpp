@@ -6,12 +6,12 @@ frame_LRU::frame_LRU(void)
 {
     init_LRU();
     init_frame();
-    cout<<"Frame LRU has been created"<<endl;
+    IUI::print("Frame LRU has been created");
 }
 
 frame_LRU::~frame_LRU()
 {
-    cout<<"Frame LRU has been dropped"<<endl;
+    IUI::print("Frame LRU has been dropped");
 }
 
 void frame_LRU::init_frame()
@@ -22,11 +22,9 @@ void frame_LRU::init_frame()
         node->frameID = i;
         insert_node(node);
     }
-    
+#ifdef DEBUG
     IUI::debug("init frame done.");
-// #ifdef DEBUG
-    // interface::IUI::debug
-// #endif
+#endif
 }
 
 /* return the first node in frame_LRU */

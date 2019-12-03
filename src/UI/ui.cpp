@@ -1,5 +1,6 @@
 #include <ui.hpp>
 #include <iostream>
+#include <string.h>
 
 #define RESET "\033[0m"
 #define BLACK "\033[30m" 
@@ -28,10 +29,10 @@ void IUI::print(char *message, int length)
 
 void IUI::print(std::string message) 
 {
-	std::cout << BOLDWHITE << "[info] " << RESET << message << std::endl;
+	std::cout << BOLDWHITE << "[info] " << RESET << GREEN << message << std::endl;
 }
 
-void IUI::error(char *message, int length) 
+void IUI::error(std::string message, int length) 
 {
 	std::string out(message, length);
 	std::cerr << BOLDRED << "[error] " << RESET << out << std::endl;
@@ -45,10 +46,32 @@ void IUI::error(std::string message)
 void IUI::debug(char *message, int length) 
 {
 	std::string out(message, length);
-	std::cerr << BOLDBLUE << "[debug] " << RESET << out << std::endl;
+	std::cerr << BLUE << "[debug] " << RESET << out << std::endl;
 }
 
 void IUI::debug(std::string message) 
 {
-	std::cerr << BOLDBLUE << "[debug] " << RESET << message << std::endl;
+	std::cerr << BLUE << "[debug] " << RESET << message << std::endl;
+}
+
+void IUI::result(std::string message, int num)
+{
+	std::cerr << BOLDBLACK << "[result] " << RESET << MAGENTA << message << num << std::endl;
+}
+
+void IUI::rule(std::string message)
+{
+	int len = message.length();
+	int max_len = 80;
+	int rule_len = (80-len)/2;
+	string rule = "";
+	for (size_t i = 0; i < rule_len; i++)
+	{
+		rule = rule + "=";
+	}
+	cerr<< BOLDYELLOW <<rule;
+	std::cout << BOLDMAGENTA << message ;
+	cerr<< BOLDYELLOW <<rule;
+	std::cout << std::endl;
+	
 }
