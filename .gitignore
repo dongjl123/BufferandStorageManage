@@ -14,8 +14,6 @@ generatedCode
 
 /Debug
 
-Debug/
-
 bin/
 
 cmake-build-*/

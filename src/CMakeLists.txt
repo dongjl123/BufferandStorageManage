@@ -4,6 +4,9 @@ SET(MY_SRC ${TEMP_SRC})
 aux_source_directory(./storage TEMP_SRC)
 SET(MY_SRC ${TEMP_SRC})
 
+aux_source_directory(./UI TEMP_SRC)
+SET(MY_SRC ${TEMP_SRC})
+
 add_library(src_lib ${TEMP_SRC})
 
 if(CMAKE_BUILD_TYPE MATCHES Debug)

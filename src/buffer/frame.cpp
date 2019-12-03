@@ -1,5 +1,6 @@
 /*===============================frame_LRU===============================*/
 #include"LRU.hpp"
+#include <ui.hpp>
 
 frame_LRU::frame_LRU(void)
 {
@@ -21,6 +22,11 @@ void frame_LRU::init_frame()
         node->frameID = i;
         insert_node(node);
     }
+    
+    IUI::debug("init frame done.");
+// #ifdef DEBUG
+    // interface::IUI::debug
+// #endif
 }
 
 /* return the first node in frame_LRU */
