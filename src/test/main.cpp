@@ -104,10 +104,6 @@ int main()
         
     }
 
-#ifdef DEBUG
-    cout<<"here"<<endl;
-#endif
-
     cout<<"Buffer_Hit is "<<Buffer_Hit<<endl;
     cout<<"IO_Hit is "<<IO_Hit<<endl;
 }

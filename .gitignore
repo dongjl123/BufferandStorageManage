@@ -10,6 +10,12 @@ generatedCode
 
 /build
 
+/Release
+
+/Debug
+
+Debug/
+
 bin/
 
 cmake-build-*/

@@ -1,8 +1,0 @@
-E:/2019 autumn/database/BufferandStorageManage/Debug/CMakeFiles/edit_cache.dir
-E:/2019 autumn/database/BufferandStorageManage/Debug/CMakeFiles/rebuild_cache.dir
-E:/2019 autumn/database/BufferandStorageManage/Debug/src/CMakeFiles/src_lib.dir
-E:/2019 autumn/database/BufferandStorageManage/Debug/src/CMakeFiles/edit_cache.dir
-E:/2019 autumn/database/BufferandStorageManage/Debug/src/CMakeFiles/rebuild_cache.dir
-E:/2019 autumn/database/BufferandStorageManage/Debug/src/test/CMakeFiles/edit_cache.dir
-E:/2019 autumn/database/BufferandStorageManage/Debug/src/test/CMakeFiles/main.dir
-E:/2019 autumn/database/BufferandStorageManage/Debug/src/test/CMakeFiles/rebuild_cache.dir

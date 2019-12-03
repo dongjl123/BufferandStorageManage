@@ -1,18 +1,19 @@
 ### 项目的编译和运行
 #### release版本
 在主项目文件夹下：
+linux命令行：
 ```shell
-$ mkdir build
-$ cd build
+$ mkdir Release
+$ cd Release
 $ cmake ../
 $ make
 $ cd bin
 $ ./main
 ```
-windows命令行下的运行方法
+windows命令行：
 ```shell
-mkdir build
-cd build
+mkdir Release
+cd Release
 cmake -G"MinGW Makefiles" ../
 mingw32-make
 cd bin
@@ -21,11 +22,20 @@ main.exe
 #### debug版本
 linux命令行：
 ```shell
-$ mkdir build
-$ cd debug
-$ cmake -g ../
+$ mkdir Debug
+$ cd Debug
+$ cmake -DCMAKE_BUILD_TYPE=Debug ../
 $ cd bin
 $ ./main
+```
+
+windows命令行：
+```shell
+mkdir Debug
+cd Debug
+cmake -G"MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug ../
+cd bin
+main.exe
 ```
 
 ---
