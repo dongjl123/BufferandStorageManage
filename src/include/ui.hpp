@@ -1,4 +1,5 @@
 #include <iostream>
+#include <time.h>
 
 using namespace std;
 
@@ -11,8 +12,11 @@ public:
     static void debug(std::string message);
     static void print(char *message, int length);
     static void error(std::string message, int length);
-    static void debug(char *message, int length);
+    static void debug(std::string message, int length);
     static void result(std::string message, int num);
     static void rule(std::string message);
+    static void print_rate(std::string message, int num);
     virtual ~IUI() = default;
 };
+
+string getTime();

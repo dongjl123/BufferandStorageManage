@@ -29,7 +29,7 @@ void IUI::print(char *message, int length)
 
 void IUI::print(std::string message) 
 {
-	std::cout << BOLDWHITE << "[info] " << RESET << GREEN << message << std::endl;
+	std::cout << BOLDWHITE << "[info] " << RESET << message << std::endl;
 }
 
 void IUI::error(std::string message, int length) 
@@ -43,10 +43,10 @@ void IUI::error(std::string message)
 	std::cerr << BOLDRED << "[error] " << RESET << message << std::endl;
 }
 
-void IUI::debug(char *message, int length) 
+void IUI::debug(std::string message, int num) 
 {
-	std::string out(message, length);
-	std::cerr << BLUE << "[debug] " << RESET << out << std::endl;
+	// std::string out(message, num);
+	std::cerr << BLUE << "[debug] " << RESET << message << num << std::endl;
 }
 
 void IUI::debug(std::string message) 
@@ -69,9 +69,14 @@ void IUI::rule(std::string message)
 	{
 		rule = rule + "=";
 	}
-	cerr<< BOLDYELLOW <<rule;
-	std::cout << BOLDMAGENTA << message ;
+	cerr << BOLDYELLOW <<rule;
+	std::cout << BOLDBLACK << " " << message << " ";
 	cerr<< BOLDYELLOW <<rule;
 	std::cout << std::endl;
 	
+}
+
+void IUI::print_rate(std::string message, int num)
+{
+	std::cout << BOLDGREEN << "[" << num << "%] "<< RESET << BLACK << message << std::endl;
 }

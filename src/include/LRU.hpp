@@ -35,6 +35,7 @@ public:
     LRU_element* return_head();     //return the node after head
     LRU_element* return_tail();     //return the node before tail
     void insert_node(LRU_element *new_node);        //insert a new node before tail
+    void insert_new_node(int pageID, int frameID);
     void drop_node(LRU_element *node);
     int drop_head();       //drop the node after head
     /* adjust the LRU */

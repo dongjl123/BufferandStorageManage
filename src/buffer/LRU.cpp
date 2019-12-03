@@ -102,6 +102,16 @@ void LRU::insert_node(LRU_element *new_node)
     LRU_len++;
 }
 
+void LRU::insert_new_node(int pageID, int frameID)
+{
+    LRU_element *new_node = new LRU_element();
+    new_node->pageID = pageID;
+    new_node->frameID = frameID;
+    new_node->isHead = false;
+    new_node->isTail = false;
+    insert_node(new_node);
+}
+
 void LRU::drop_node(LRU_element *node)
 {
     node->front->next = node->next;
