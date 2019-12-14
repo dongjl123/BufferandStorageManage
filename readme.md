@@ -131,7 +131,8 @@ struct BCB
 
 #### IUI界面类
 1. `print`用于正常输出界面
-2. `error`用于报错界面
-3. `debug`用于调试界面
-4. `rule`用于分割界面
-5. `print_rate`用于进度界面的显示
+2. `time_result`用于时间的输出
+3. `error`用于报错界面
+4. `debug`用于调试界面
+5. `rule`用于分隔界面
+6. `print_rate`用于进度界面的显示

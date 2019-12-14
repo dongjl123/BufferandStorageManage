@@ -6,6 +6,7 @@
 #include <data.hpp>
 #include <test_data.hpp>
 #include <ui.hpp>
+#include <time.h>
 #include <string>
 
 int main()
@@ -16,6 +17,7 @@ int main()
 
     /* init */
     IUI::rule("init system");
+    IUI::print("Buffer Size is :", BufSize);
     LRU LRU_list = LRU();
     frame_LRU frame = frame_LRU();
     Hash hash = Hash();
@@ -45,6 +47,11 @@ int main()
 
     /* handle data request */
     IUI::rule("handle data request");
+
+    clock_t start,finish;
+    double totaltime;
+    start=clock();
+
     bool LRUfull = false;
     IUI::print_rate("begin to handle data.", 0);
 
@@ -70,7 +77,9 @@ int main()
             {
                 if(!LRUfull)
                 {
-                    IUI::print_rate("LRU is full now.", 25);
+                    double rate = (double)num/(double)TestNum*100+(double)(TestNum-num)/(double)TestNum*5;
+                    int p = (int )rate;
+                    IUI::print_rate("LRU is full now.", rate);
                     LRUfull = true;
                 }
                 
@@ -123,4 +132,9 @@ int main()
     IUI::result("IO_Hit is: ", IO_Hit);
 
     IUI::rule("end");
+
+    finish=clock();
+    totaltime=(double)(finish-start)/CLOCKS_PER_SEC;
+    IUI::time_result("time is: ", totaltime);
+
 }

@@ -25,10 +25,14 @@ void IUI::print(std::string message)
 	std::cout << BOLDWHITE << "[info] " << RESET << message << std::endl;
 }
 
+void IUI::print(std::string message, long long length) 
+{
+	std::cerr << BOLDWHITE << "[info] " << RESET << message << length << std::endl;
+}
+
 void IUI::error(std::string message, int length) 
 {
-	std::string out(message, length);
-	std::cerr << BOLDRED << "[error] " << RESET << out << std::endl;
+	std::cerr << BOLDRED << "[error] " << RESET << message << length << std::endl;
 }
 
 void IUI::error(std::string message) 
@@ -38,7 +42,6 @@ void IUI::error(std::string message)
 
 void IUI::debug(std::string message, int num) 
 {
-	// std::string out(message, num);
 	std::cerr << BLUE << "[debug] " << RESET << message << num << std::endl;
 }
 
@@ -50,6 +53,11 @@ void IUI::debug(std::string message)
 void IUI::result(std::string message, int num)
 {
 	std::cerr << BOLDBLACK << "[result] " << RESET << MAGENTA << message << num << std::endl;
+}
+
+void IUI::time_result(std::string message, double num)
+{
+	std::cerr << BOLDBLACK << "[time] " << RESET << MAGENTA << message << num << "s" << std::endl;
 }
 
 void IUI::rule(std::string message)
